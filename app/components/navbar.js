@@ -100,7 +100,7 @@ export default function Navbar() {
         {!user && (
           <Link
             href="/user/login"
-            className="block bg-orange-accent text-white py-2 px-3 rounded-full hover:bg-orange-accent/80 transition-colors"
+            className="bg-orange-accent text-white py-2 px-4 rounded-full hover:bg-orange-accent/80 transition-colors w-fit md:inline-block hidden md:block"
           >
             Log In
           </Link>
