@@ -76,7 +76,7 @@ export default function HeroSection() {
           <br />
           <Typewriter
             options={{
-              strings: ["I'm Varad Ramesh Nikharage "],
+              strings: ["I'm Varad"],
               autoStart: true,
               loop: true,
             }}
