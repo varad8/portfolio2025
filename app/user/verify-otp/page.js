@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect, Suspense } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { toast, Toaster } from "react-hot-toast";
@@ -149,137 +149,134 @@ export default function VerifyOtpPage() {
   };
 
   return (
-    <Suspense>
-      {" "}
-      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-50 via-white to-green-50 px-4 overflow-hidden">
-        <Toaster position="top-center" />
+    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-50 via-white to-green-50 px-4 overflow-hidden">
+      <Toaster position="top-center" />
 
-        {/* Abstract Animated Lines */}
-        <svg
-          className="pointer-events-none absolute left-0 top-0 w-full h-full z-0"
-          width="100%"
-          height="100%"
-          viewBox="0 0 1440 900"
+      {/* Abstract Animated Lines */}
+      <svg
+        className="pointer-events-none absolute left-0 top-0 w-full h-full z-0"
+        width="100%"
+        height="100%"
+        viewBox="0 0 1440 900"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        style={{ minHeight: 600 }}
+      >
+        <motion.path
+          d="M0 200 Q 360 300 720 200 T 1440 200"
+          stroke="#F59E42"
+          strokeWidth="2"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          style={{ minHeight: 600 }}
-        >
-          <motion.path
-            d="M0 200 Q 360 300 720 200 T 1440 200"
-            stroke="#F59E42"
-            strokeWidth="2"
-            fill="none"
-            initial={{ pathLength: 0, opacity: 0.3 }}
-            animate={{ pathLength: 1, opacity: 0.5 }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut",
-            }}
-          />
-          <motion.path
-            d="M0 400 Q 480 500 960 400 T 1440 400"
-            stroke="#34D399"
-            strokeWidth="2"
-            fill="none"
-            initial={{ pathLength: 0, opacity: 0.2 }}
-            animate={{ pathLength: 1, opacity: 0.4 }}
-            transition={{
-              duration: 2.5,
-              delay: 0.5,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut",
-            }}
-          />
-          <motion.path
-            d="M0 600 Q 360 700 720 600 T 1440 600"
-            stroke="#F59E42"
-            strokeWidth="1.5"
-            fill="none"
-            initial={{ pathLength: 0, opacity: 0.15 }}
-            animate={{ pathLength: 1, opacity: 0.3 }}
-            transition={{
-              duration: 3,
-              delay: 1,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut",
-            }}
-          />
-        </svg>
+          initial={{ pathLength: 0, opacity: 0.3 }}
+          animate={{ pathLength: 1, opacity: 0.5 }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            repeatType: "reverse",
+            ease: "easeInOut",
+          }}
+        />
+        <motion.path
+          d="M0 400 Q 480 500 960 400 T 1440 400"
+          stroke="#34D399"
+          strokeWidth="2"
+          fill="none"
+          initial={{ pathLength: 0, opacity: 0.2 }}
+          animate={{ pathLength: 1, opacity: 0.4 }}
+          transition={{
+            duration: 2.5,
+            delay: 0.5,
+            repeat: Infinity,
+            repeatType: "reverse",
+            ease: "easeInOut",
+          }}
+        />
+        <motion.path
+          d="M0 600 Q 360 700 720 600 T 1440 600"
+          stroke="#F59E42"
+          strokeWidth="1.5"
+          fill="none"
+          initial={{ pathLength: 0, opacity: 0.15 }}
+          animate={{ pathLength: 1, opacity: 0.3 }}
+          transition={{
+            duration: 3,
+            delay: 1,
+            repeat: Infinity,
+            repeatType: "reverse",
+            ease: "easeInOut",
+          }}
+        />
+      </svg>
 
-        <motion.div
-          className="w-full max-w-md bg-white p-8 rounded-xl shadow-md z-10"
-          initial={{ opacity: 0, y: 40, scale: 0.97 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.7, type: "spring" }}
+      <motion.div
+        className="w-full max-w-md bg-white p-8 rounded-xl shadow-md z-10"
+        initial={{ opacity: 0, y: 40, scale: 0.97 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.7, type: "spring" }}
+      >
+        <h2 className="text-2xl font-bold text-slate-dark text-center mb-4">
+          Verify OTP
+        </h2>
+        <p className="text-center text-mid-gray mb-6">
+          Enter the 6-digit code sent to your email
+          {email ? ` (${email})` : ""}.
+        </p>
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col items-center gap-6"
         >
-          <h2 className="text-2xl font-bold text-slate-dark text-center mb-4">
-            Verify OTP
-          </h2>
-          <p className="text-center text-mid-gray mb-6">
-            Enter the 6-digit code sent to your email
-            {email ? ` (${email})` : ""}.
-          </p>
-          <form
-            onSubmit={handleSubmit}
-            className="flex flex-col items-center gap-6"
-          >
-            <div className="flex gap-2 justify-center">
-              {otp.map((digit, idx) => (
-                <input
-                  key={idx}
-                  ref={(el) => (inputsRef.current[idx] = el)}
-                  type="text"
-                  inputMode="numeric"
-                  maxLength={1}
-                  value={digit}
-                  onChange={(e) => handleChange(e, idx)}
-                  onKeyDown={(e) => handleKeyDown(e, idx)}
-                  className="w-12 h-14 text-2xl text-center border border-soft-gray rounded-md focus:ring-2 focus:ring-orange-accent outline-none bg-gray-50 transition"
-                  disabled={loading}
-                  autoFocus={idx === 0}
-                />
-              ))}
-            </div>
-            <motion.button
-              type="submit"
-              className="w-full bg-orange-accent text-white font-semibold py-3 rounded-md hover:bg-opacity-90 transition mt-2"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              disabled={loading}
-            >
-              {loading ? (
-                <span className="animate-spin mr-2 h-5 w-5 border-2 border-white border-t-transparent rounded-full inline-block"></span>
-              ) : null}
-              Verify OTP
-            </motion.button>
-          </form>
-          <div className="flex flex-col items-center mt-6">
-            <span className="text-sm text-mid-gray">
-              {timer > 0 ? (
-                <>
-                  Resend OTP in{" "}
-                  <span className="font-semibold text-orange-accent">
-                    {timer}s
-                  </span>
-                </>
-              ) : (
-                <button
-                  onClick={handleResend}
-                  className="text-orange-accent font-semibold hover:underline disabled:opacity-60"
-                  disabled={resending}
-                >
-                  {resending ? "Resending..." : "Resend OTP"}
-                </button>
-              )}
-            </span>
+          <div className="flex gap-2 justify-center">
+            {otp.map((digit, idx) => (
+              <input
+                key={idx}
+                ref={(el) => (inputsRef.current[idx] = el)}
+                type="text"
+                inputMode="numeric"
+                maxLength={1}
+                value={digit}
+                onChange={(e) => handleChange(e, idx)}
+                onKeyDown={(e) => handleKeyDown(e, idx)}
+                className="w-12 h-14 text-2xl text-center border border-soft-gray rounded-md focus:ring-2 focus:ring-orange-accent outline-none bg-gray-50 transition"
+                disabled={loading}
+                autoFocus={idx === 0}
+              />
+            ))}
           </div>
-        </motion.div>
-      </section>
-    </Suspense>
+          <motion.button
+            type="submit"
+            className="w-full bg-orange-accent text-white font-semibold py-3 rounded-md hover:bg-opacity-90 transition mt-2"
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            disabled={loading}
+          >
+            {loading ? (
+              <span className="animate-spin mr-2 h-5 w-5 border-2 border-white border-t-transparent rounded-full inline-block"></span>
+            ) : null}
+            Verify OTP
+          </motion.button>
+        </form>
+        <div className="flex flex-col items-center mt-6">
+          <span className="text-sm text-mid-gray">
+            {timer > 0 ? (
+              <>
+                Resend OTP in{" "}
+                <span className="font-semibold text-orange-accent">
+                  {timer}s
+                </span>
+              </>
+            ) : (
+              <button
+                onClick={handleResend}
+                className="text-orange-accent font-semibold hover:underline disabled:opacity-60"
+                disabled={resending}
+              >
+                {resending ? "Resending..." : "Resend OTP"}
+              </button>
+            )}
+          </span>
+        </div>
+      </motion.div>
+    </section>
   );
 }
 
