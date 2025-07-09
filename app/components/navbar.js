@@ -96,14 +96,16 @@ export default function Navbar() {
           <ProfileMenu userProfile={user} />
         </div>
 
-        {/* Login Button (desktop only) */}
+        {/* Login Button - visible on desktop only */}
         {!user && (
-          <Link
-            href="/user/login"
-            className="bg-orange-accent text-white p-2 rounded-full hover:bg-orange-accent/80 transition-colors w-fit inline-block  md:block"
-          >
-            Log In
-          </Link>
+          <div className="hidden md:block ml-4">
+            <Link
+              href="/user/login"
+              className="bg-orange-accent text-white px-4 py-2 rounded-full hover:bg-orange-accent/80 transition-all duration-300 text-sm"
+            >
+              Log In
+            </Link>
+          </div>
         )}
 
         {/* Toggle Icon for mobile */}
@@ -183,6 +185,16 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
+
+            {!user && (
+              <Link
+                href="/user/login"
+                className="block bg-orange-accent text-white text-center px-4 py-2 rounded-full hover:bg-orange-accent/80 transition-all duration-300"
+                onClick={() => setIsOpen(false)}
+              >
+                Log In
+              </Link>
+            )}
           </motion.nav>
         ) : null}
       </AnimatePresence>
