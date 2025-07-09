@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@theme {
+  --color-slate-dark: #2b3a3e;
+  --color-light-gray: #ececee;
+  --color-mid-gray: #939799;
+  --color-orange-accent: #c36244;
+  --color-earthy-brown: #9e8565;
+  --color-soft-gray: #bbbcbd;
+}
+
+:root {
+  --background-color: var(--color-light-gray);
+}
+
+.filtershadow {
+  filter: drop-shadow(1px 1px 10px var(--color-orange-accent));
+}
+
+/* Add to globals.css */
+@keyframes glow-pulse {
+  0% {
+    box-shadow: 0 0 0px rgba(195, 98, 68, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 12px 6px rgba(195, 98, 68, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 0px rgba(195, 98, 68, 0.5);
+  }
+}
+
+.glowing-dot {
+  animation: glow-pulse 2s ease-in-out infinite;
+  border-radius: 9999px;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background-color: var(--color-orange-accent);
+  opacity: 0.5;
+  z-index: -1;
+}
