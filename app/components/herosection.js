@@ -18,7 +18,17 @@ import Link from "next/link";
 import HireMeBadge from "./HireMeBadge";
 import { motion } from "framer-motion";
 import Cookies from "js-cookie";
+import { Roboto_Mono, Inter } from "next/font/google";
 
+const robotoMono = Roboto_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"], // choose weights
+});
+
+const inter = Inter({
+  weight: ["400", "500", "600"],
+  subsets: ["latin"],
+});
 export default function HeroSection() {
   const floatVariants = {
     initial: { opacity: 0, y: 20 },
@@ -68,10 +78,12 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative w-full min-h-[90vh] bg-gradient-to-r from-slate-dark via-earthy-brown to-light-gray text-white flex flex-col md:flex-row items-center justify-between px-6 md:px-20 py-12 overflow-hidden">
+    <section
+      className={`relative w-full min-h-[90vh] bg-gradient-to-r from-slate-dark via-earthy-brown to-light-gray text-white flex flex-col md:flex-row items-center justify-between px-6 md:px-20 py-12 overflow-hidden ${robotoMono.className}`}
+    >
       {/* Left Content */}
       <div className="relative z-10 w-full md:w-1/2 space-y-6 text-center md:text-left">
-        <h1 className="text-4xl font-bold leading-tight">
+        <h1 className={`text-4xl font-bold leading-tigh ${inter.className}`}>
           {user ? `Hey👋, ${user.fullName.split(" ")[0]}` : "Hi👋,"}
           <br />
           <Typewriter
@@ -82,7 +94,9 @@ export default function HeroSection() {
             }}
           />
         </h1>
-        <h1 className="text-3xl md:text-5xl font-bold leading-tight">
+        <h1
+          className={`text-3xl font-bold leading-tight ${robotoMono.className} `}
+        >
           Build Stunning{" "}
           <span className="text-orange-accent">Web Experiences</span>
         </h1>
