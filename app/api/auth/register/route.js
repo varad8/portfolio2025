@@ -4,6 +4,7 @@ import Otp from "@/models/Otp";
 import bcrypt from "bcryptjs";
 import { generateOTP } from "@/lib/generateOTP";
 import { sendMail } from "@/lib/sendMail";
+import disposableEmailDetector from "disposable-email-detector";
 
 export async function POST(req) {
   await dbConnect();
@@ -21,8 +22,60 @@ export async function POST(req) {
     pincode,
   } = body;
 
+  // Check for disposable email
+  const isDisposable = await disposableEmailDetector(email);
+  if (isDisposable) {
+    return Response.json(
+      { error: "Disposable email addresses are not allowed" },
+      { status: 400 }
+    );
+  }
+
+  // Validate required fields one by one and exit on first failure
+  if (!fullName?.trim()) {
+    return Response.json({ error: "Full name is required" }, { status: 400 });
+  }
+
+  if (!email?.trim()) {
+    return Response.json({ error: "Email is required" }, { status: 400 });
+  }
+
+  if (!/^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(email)) {
+    return Response.json(
+      { error: "Only valid email address is allowed" },
+      { status: 400 }
+    );
+  }
+
+  if (!mobile || !/^[6-9]\d{9}$/.test(mobile)) {
+    return Response.json({ error: "Invalid mobile number" }, { status: 400 });
+  }
+
+  if (!password || password.length < 6) {
+    return Response.json(
+      { error: "Password must be at least 6 characters" },
+      { status: 400 }
+    );
+  }
+
   if (password !== confirmPassword) {
     return Response.json({ error: "Passwords do not match" }, { status: 400 });
+  }
+
+  if (!address?.trim()) {
+    return Response.json({ error: "Address is required" }, { status: 400 });
+  }
+
+  if (!city?.trim()) {
+    return Response.json({ error: "City is required" }, { status: 400 });
+  }
+
+  if (!state?.trim()) {
+    return Response.json({ error: "State is required" }, { status: 400 });
+  }
+
+  if (!pincode || !/^\d{6}$/.test(pincode)) {
+    return Response.json({ error: "Invalid pincode" }, { status: 400 });
   }
 
   const existing = await User.findOne({ email });
