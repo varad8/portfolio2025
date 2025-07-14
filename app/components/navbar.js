@@ -90,11 +90,10 @@ export default function Navbar() {
         <div className="flex items-center">
           <Image
             className="object-contain"
-            src={`/images/logo.png`}
+            src={`/images/LOGO_2.png`}
             alt="Logo"
-            width={100}
+            width={120}
             height={100}
-         
           />
         </div>
 
