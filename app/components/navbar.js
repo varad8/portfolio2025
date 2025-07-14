@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import ProfileMenu from "./ProfileMenu";
 import { Lobster, Open_Sans } from "next/font/google";
 import { FaShoppingCart } from "react-icons/fa";
+import Image from "next/image";
 
 const lobster = Lobster({
   weight: "400",
@@ -71,7 +72,7 @@ export default function Navbar() {
     >
       <div className="flex items-center justify-between px-6 py-4 md:px-12">
         {/* Logo */}
-        <div className="text-2xl font-bold">
+        {/* <div className="text-2xl font-bold">
           <div className="flex gap-2 p-0.5 items-center">
             <h1
               className={`bg-orange-accent text-[18px] text-white rounded-md px-0.5 py-1 ${lobster.className}`}
@@ -84,6 +85,17 @@ export default function Navbar() {
               Nikharage
             </span>
           </div>
+        </div> */}
+
+        <div className="flex items-center">
+          <Image
+            className="object-contain"
+            src={`/images/logo.png`}
+            alt="Logo"
+            width={100}
+            height={100}
+         
+          />
         </div>
 
         {/* Desktop Nav - center */}
