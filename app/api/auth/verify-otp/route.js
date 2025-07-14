@@ -91,7 +91,7 @@ export async function POST(req) {
 
               <!-- Button -->
               <div style="text-align:center;margin-top:32px;">
-                <a href="{{login_link}}" style="background-color:#f97316;color:#ffffff;text-decoration:none;padding:12px 24px;border-radius:9999px;font-weight:bold;display:inline-block;">
+                <a href="https://varadnikharage.netlify.app/user/login" style="background-color:#f97316;color:#ffffff;text-decoration:none;padding:12px 24px;border-radius:9999px;font-weight:bold;display:inline-block;">
                   Log In to Your Account
                 </a>
               </div>
