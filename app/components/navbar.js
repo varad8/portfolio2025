@@ -87,13 +87,12 @@ export default function Navbar() {
           </div>
         </div> */}
 
-        <div className="flex items-center">
+        <div className="relative w-[100px] h-[40px]">
           <Image
-            className="object-contain"
-            src={`/images/LOGO_2.png`}
+            src="/images/LOGO_2.png"
             alt="Logo"
-            width={120}
-            height={100}
+            fill
+            className="object-contain"
             priority
           />
         </div>
