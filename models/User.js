@@ -12,6 +12,8 @@ const UserSchema = new mongoose.Schema(
     state: String,
     pincode: String,
     isVerified: { type: Boolean, default: false },
+    resetToken: String,
+    resetTokenExpiry: Date,
   },
   { timestamps: true }
 );

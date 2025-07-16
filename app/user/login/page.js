@@ -193,6 +193,12 @@ export default function LoginPage() {
           {/* Optional: Forgot */}
           <p className="text-sm text-mid-gray text-center mt-3">
             Forgot your password?{" "}
+            <Link
+              href="/user/forgot-password"
+              className="text-orange-accent hover:underline"
+            >
+              Reset it here
+            </Link>
           </p>
         </form>
       </motion.div>
